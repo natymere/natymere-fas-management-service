@@ -1,0 +1,10 @@
+package com.example.fms.repository;
+
+import com.example.fms.entity.Application;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.UUID;
+
+public interface ApplicationRepository extends JpaRepository<Application, UUID> {
+
+}
