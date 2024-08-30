@@ -13,6 +13,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.Instant;
 import java.util.HashMap;
@@ -47,6 +48,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ResponseBody
+    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(MethodArgumentTypeMismatchException e, HttpServletRequest request) {
+        logger.error("Illegal argument exception occurred: {} Time taken: {} ms", e.getMessage(), RequestContext.getRequestDuration(), e);
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Illegal Argument", e.getMessage(), Instant.now(), constructURI(request));
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
 
     @ExceptionHandler(DtoValidationException.class)
     public ResponseEntity<?> handleValidationException(DtoValidationException e, HttpServletRequest request) {

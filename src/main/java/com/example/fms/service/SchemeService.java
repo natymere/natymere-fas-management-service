@@ -52,14 +52,21 @@ public class SchemeService {
                 .collect(Collectors.toList());
     }
 
-    private boolean isEligible(Applicant applicant, Scheme scheme) {
+    public boolean isEligible(Applicant applicant, Scheme scheme) {
         try {
             TypeReference<Map<String, Object>> typeRef = new TypeReference<>() {};
             Map<String, Object> eligibilityCriteria = objectMapper.readValue(scheme.getEligibilityCriteria(), typeRef);
 
             if (eligibilityCriteria.containsKey("employment_status")) {
                 String employmentStatus = (String) eligibilityCriteria.get("employment_status");
-                if (!applicant.getEmploymentStatus().name().equals(employmentStatus)) {
+                if (!applicant.getEmploymentStatus().name().equals(employmentStatus.toUpperCase())) {
+                    return false;
+                }
+            }
+
+            if (eligibilityCriteria.containsKey("marital_status")) {
+                String maritalStatus = (String) eligibilityCriteria.get("marital_status");
+                if (!applicant.getMaritalStatus().name().equals(maritalStatus.toUpperCase())) {
                     return false;
                 }
             }

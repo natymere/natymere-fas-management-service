@@ -1,5 +1,6 @@
 package com.example.fms.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -42,6 +43,7 @@ public class Benefit {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "scheme_id")
     private Scheme scheme;

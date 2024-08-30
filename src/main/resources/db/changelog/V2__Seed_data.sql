@@ -12,7 +12,7 @@ INSERT INTO household_members (id, applicant_id, household_member_id, relation) 
 
 -- Insert Schemes
 INSERT INTO schemes (id, name, description, eligibility_criteria) VALUES
-('01913b89-9a43-7163-8757-01cc254783f3', 'Retrenchment Assistance Scheme', 'Assistance for unemployed individuals', '{"employment_status": "UNEMPLOYED"}'),
+('01913b89-9a43-7163-8757-01cc254783f3', 'Retrenchment Assistance Scheme', 'Assistance for unemployed individuals', '{"employment_status": "UNEMPLOYED", "marital_status": "SINGLE"}'),
 ('01913b89-befc-7ae3-bb37-3079aa7f1be0', 'Retrenchment Assistance Scheme (families)', 'Assistance for unemployed families with school-going children', '{"employment_status": "UNEMPLOYED", "has_children": {"school_level": "PRIMARY"}}');
 
 -- Insert Benefits
@@ -21,3 +21,6 @@ INSERT INTO benefits (id, scheme_id, name, description, amount, percentage) VALU
 ('d420da4c-158f-48f4-aa03-517b4923b64e', '01913b89-9a43-7163-8757-01cc254783f3', 'CDC Vouchers', 'Additional CDC vouchers', 300.00, NULL),
 ('3fac749e-031e-4641-aeb8-8e80cf5aa8ec', '01913b89-befc-7ae3-bb37-3079aa7f1be0', 'Daily School Meal Vouchers', 'Daily school meal vouchers for applicants (for applicants with children attending primary school only)', 100.00, NULL),
 ('4dcac6ba-1374-43d5-be57-0157a0303e74', '01913b89-befc-7ae3-bb37-3079aa7f1be0', 'CDC Vouchers', 'Additional CDC vouchers', 500.00, NULL);
+
+INSERT INTO administrators (id, username, password, full_name, email, role, created_at, updated_at)
+VALUES ('a56b15fc-b2c6-4b83-b615-3e3c77dd4f73', 'admin', '{noop}coolbeans', 'Administrator', 'admin@example.com', 'ROLE_ADMIN', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

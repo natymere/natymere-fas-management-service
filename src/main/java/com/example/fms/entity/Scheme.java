@@ -1,10 +1,13 @@
 package com.example.fms.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Builder
 @ToString(exclude = "benefits")
@@ -39,6 +42,7 @@ public class Scheme {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "scheme", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Benefit> benefits = new ArrayList<>();
 
